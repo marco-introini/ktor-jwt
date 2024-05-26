@@ -9,6 +9,9 @@ import kotlinx.serialization.encoding.Encoder
 import java.util.UUID
 
 object UUIDSerializer : KSerializer<UUID> {
+
+    // TODO: when not valid it crashes
+
     override val descriptor: SerialDescriptor
         get() = PrimitiveSerialDescriptor("UUID", PrimitiveKind.STRING)
 
