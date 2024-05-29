@@ -4,6 +4,7 @@ import io.ktor.server.application.*
 import me.mintdev.plugins.*
 import me.mintdev.repository.UserRepository
 import me.mintdev.routing.configureRouting
+import me.mintdev.service.JwtService
 import me.mintdev.service.UserService
 
 fun main(args: Array<String>) {
@@ -13,8 +14,9 @@ fun main(args: Array<String>) {
 fun Application.module() {
     val userRepository = UserRepository()
     val userService = UserService(userRepository)
+    val jwtService = JwtService(application = this, userService)
 
     configureSerialization()
-    configureSecurity()
-    configureRouting(userService)
+    configureSecurity(jwtService)
+    configureRouting(userService, jwtService)
 }
