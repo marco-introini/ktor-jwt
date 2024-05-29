@@ -2,6 +2,8 @@ package me.mintdev.routing
 
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -31,26 +33,30 @@ fun Route.userRoute(
     }
 
     // get all users
-    get {
+    authenticate {
+        get {
 
-        val users = userService.findAll()
-        call.respond(
-            message = users.map(User::toResponse)
-         )
+            val users = userService.findAll()
+            call.respond(
+                message = users.map(User::toResponse)
+            )
 
+        }
     }
 
     // get a single user
-    get("/{id}") {
-        val id: String = call.parameters["id"]
-            ?: return@get call.respond(HttpStatusCode.BadRequest)
+    authenticate {
+        get("/{id}") {
+            val id: String = call.parameters["id"]
+                ?: return@get call.respond(HttpStatusCode.BadRequest)
 
-        val foundUser: User = userService.findById(id)
-            ?: return@get call.respond(HttpStatusCode.NotFound)
+            val foundUser: User = userService.findById(id)
+                ?: return@get call.respond(HttpStatusCode.NotFound)
 
-        call.respond(
-            message = foundUser.toResponse()
-        )
+            call.respond(
+                message = foundUser.toResponse()
+            )
+        }
     }
 
 }
@@ -66,3 +72,9 @@ private fun User.toResponse(): UserResponse =
         id = this.id,
         username = this.username
     )
+
+
+fun extractJwtUsername(call: ApplicationCall): String? = call.principal<JWTPrincipal>()
+    ?.payload
+    ?.getClaim("username")
+    ?.asString()
