@@ -4,7 +4,9 @@ ktor:
             - me.mintdev.ApplicationKt.module
     deployment:
         port: 8080
+        auto-reload: true
 jwt:
-  domain: "https://jwt-provider-domain/"
-  audience: "jwt-audience"
-  realm: "ktor sample app"
+    issuer: "http://localhost"
+    audience: "mintdev-audience"
+    realm: "mintdev ktor sample app"
+    secret: "secret" #${SECRET}
