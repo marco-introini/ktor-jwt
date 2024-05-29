@@ -1,0 +1,12 @@
+###
+GET http://localhost:8080/api/user
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoibWludGRldi1hdWRpZW5jZSIsInVzZXJuYW1lIjoidXNlcm5hbWUiLCJleHAiOjE3MTY5NzUzMjZ9.izkzf9gkvZG0azDP291WNti0DKtwuNeeY-BexDjwY1s
+
+###
+
+GET http://localhost:8080/api/user/cfc67373-fc9d-411e-b319-6fe558a8d367
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiYXVkIjoibWludGRldi1hdWRpZW5jZSIsInVzZXJuYW1lIjoidXNlcm5hbWUiLCJleHAiOjE3MTY5NzUzMjZ9.izkzf9gkvZG0azDP291WNti0DKtwuNeeY-BexDjwY1s
+
+###
